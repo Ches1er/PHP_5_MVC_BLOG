@@ -8,7 +8,7 @@ return [
             "controller" => "main",
             "action" => "index",
         ]),
-        new Route("showcat/{catid}", [
+        new Route("showcat/{caturl}", [
             "controller" => "main",
             "action" => "index",
         ]),

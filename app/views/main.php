@@ -3,7 +3,7 @@
         <li><a href="/">Main</a></li>
         <li>Категории<ul class="category_menu">
                 <?php foreach ($menu_cat as $cat):?>
-                <li><a href="/showcat/<?=$cat->category_id?>"><?=$cat->category_name?></a></li>
+                <li><a href="/showcat/<?=$cat->category_url?>"><?=$cat->category_name?></a></li>
                 <?php endforeach;?>
             </ul></li>
         <?php if (!empty($user_roles)):
@@ -13,9 +13,9 @@
                   <?php elseif ($role==="user")  :?>
                       <li><a href="/profile">User Profile</a></li>
                       <li><a href="/myposts">My Posts</a></li>
-                    <?php endif;
-                    endforeach;
-                    endif;?>
+                  <?php endif; ?>
+                  <?php endforeach;?>
+                  <?php endif;?>
         <li>
             <ul class="auth_menu">
                 <li><a href="/main/register">Регистрация</a></li>

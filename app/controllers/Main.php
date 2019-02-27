@@ -18,7 +18,7 @@ class Main extends Controller
         $view = new TemplateView("main","templates/def");
         $view->user_name=MainService::instance()->activUser();
         $view->user_roles = MainService::instance()->activUserRole();
-        $view->posts=MainService::instance()->getPosts($this->getParam("catid"));
+        $view->posts=MainService::instance()->getPosts($this->getParam("caturl"));
         $view->menu_cat=MainService::instance()->getCategories();
         $view->error=MainService::instance()->getError();
         Auth::instance()->delError();

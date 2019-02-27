@@ -45,10 +45,9 @@ class MainService
         return [];
     }
 
-    public function getPosts($category_id){
-        if ($category_id===null) $posts = Post::get();
-        else $posts = Post::where("category_id",$category_id)->get();
-        return $posts;
+    public function getPosts($category_url){
+        if ($category_url===null) return Post::get();
+        return Category::where("category_url",$category_url)->first()->posts();
     }
 
     public function getError(){

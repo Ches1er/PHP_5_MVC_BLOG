@@ -42,7 +42,8 @@ CREATE TABLE posts
   category_id int(11) NOT NULL,
   data varchar(255) NOT NULL,
   post_name varchar(255) NOT NULL,
-  post_desc mediumtext NOT NULL,
+  post_desc tinytext NOT NULL,
+  post_full mediumtext NOT NULL,
   CONSTRAINT posts_users_user_id_fk FOREIGN KEY (user_id) REFERENCES users (user_id),
   CONSTRAINT posts_categories_category_id_fk FOREIGN KEY (category_id) REFERENCES categories (category_id)
 );
