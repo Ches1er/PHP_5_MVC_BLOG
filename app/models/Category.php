@@ -19,6 +19,7 @@ class Category extends \core\base\Model
         $this->addData(["category_name"=>$cat_name]);
     }
     public function posts(){
-        $this->hasMany(Post::class,"category_id","category_id")->get();
+        return $this->hasMany(Post::class,"category_id","category_id")->get();
     }
+
 }

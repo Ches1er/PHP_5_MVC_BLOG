@@ -7,6 +7,7 @@
             <p><?php echo $post->post_name?></p>
             <p><?php echo $post->data?></p>
             <p><?php echo $post->post_desc?></p>
+            <a href="/myposts/delpost/<?=$post->post_id?>">delete post</a>
         <?php endforeach;
         endif;?>
     </div>

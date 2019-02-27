@@ -247,7 +247,7 @@ class DBQueryBuilder
         $q = $this->one($data);
         return $q ? new $this->class($q) : null;
     }
-    //INSERT UPDATE
+    //INSERT UPDATE DELETE
     public function insert($table,array $data){
         $fields = implode("`,`",array_keys($data));
         $values = implode(", :",array_keys($data));
@@ -267,5 +267,10 @@ class DBQueryBuilder
         }
         $q = "UPDATE {$table} SET {$list} {$where}";
         $this->executor->executeUpdate($q,array_merge($insert_data,$params));
+    }
+    public function delete($table,array $data=[]){
+        $where = $this->buildWhere();
+        $q = "DELETE FROM {$table} {$where}";
+        $this->executor->executeUpdate($q,$data);
     }
 }

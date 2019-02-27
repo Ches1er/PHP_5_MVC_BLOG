@@ -69,7 +69,6 @@ abstract class Model
             ->from($class::$table)->where($far_key,$this->$current_key)->first();
     }
     protected function hasMany($class,$far_key=null,$current_key="id"){
-        var_dump($this->$current_key);
         $class2 = get_class($this);
         if($far_key===null) $far_key = $class2::$table."_id";
         return DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME,$class)

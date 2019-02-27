@@ -77,6 +77,13 @@ return [
             "secure"=>true,
             "role"=>"user"
         ]),
+        new Route("myposts/delpost/{postid}",[
+            "controller" => "author",
+            "action" => "deletepost",
+        ],[
+            "secure"=>true,
+            "role"=>"user"
+        ]),
 
 
         //Profile

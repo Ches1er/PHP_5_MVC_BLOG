@@ -1,7 +1,7 @@
 <div class="menu">
     <ul class="main_menu">
         <li><a href="/">Main</a></li>
-        <li>Категории<ul class="category_menu">
+        <li><span>Категории</span><ul class="category_menu">
                 <?php foreach ($menu_cat as $cat):?>
                 <li><a href="/showcat/<?=$cat->category_url?>"><?=$cat->category_name?></a></li>
                 <?php endforeach;?>
@@ -17,12 +17,12 @@
                   <?php endforeach;?>
                   <?php endif;?>
         <li>
+            <?php if ($user_name==="non activ user"):?>
             <ul class="auth_menu">
-                <li><a href="/main/register">Регистрация</a></li>
-                <?php if ($user_name!="non activ user"):?>
-                    <li><a href="/main/logout">Выход</a></li>
-                <?php else:?>
+                    <li><a href="/main/register">Регистрация</a></li>
                     <li><a href="/main/login">Вход</a></li>
+                <?php else:?>
+                    <li><a href="/main/logout">Выход</a></li>
                 <?php endif;?>
             </ul>
         </li>
@@ -38,17 +38,19 @@ if (isset($error)):?>
 
 <!-- Activ user -->
 
-<div class="activ_user"><?= $user_name?></div>
+<div class="activ_user"><?= "Current user: ".$user_name?></div>
 
 <!-- All Posts -->
 
 <div class="posts">
     <?php if (!empty($posts)):
         foreach ($posts as $post):?>
-    <p><a href="\post\<?=$post->post_id?>"><?=$post->post_name?></a></p>
-    <p><?=$post->author()->login?></p>
-    <p><?=$post->data?></p>
-    <p><?=$post->post_desc?></p>
-    <?php endforeach;
+            <div class="main_post">
+            <p><a href="\post\<?=$post->post_id?>"><?=$post->post_name?></a></p>
+            <p><?=$post->author()->login?></p>
+            <p><?=$post->data?></p>
+            <p><?=$post->post_desc?></p>
+            </div>
+        <?php endforeach;
     endif;?>
 </div>

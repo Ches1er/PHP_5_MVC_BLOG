@@ -19,5 +19,4 @@ spl_autoload_register(function ($classname){
     }
 });
 
-
 Application::run();
