@@ -6,32 +6,34 @@
  * Time: 19:35
  */
 namespace app\controllers;
-use app\models\Film;
+use app\Services\MainService;
 use app\models\Post;
-use app\models\User;
+use app\models\Comment;
 use core\auth\Auth;
-use core\auth\Credential;
-use core\auth\implementation\encoders\Md5PasswordEncoder;
 use core\base\Controller;
 use core\base\TemplateView;
-use core\base\View;
-use core\db\DBQueryBuilder;
 class Main extends Controller
 {
     public function actionIndex(){
         $view = new TemplateView("main","templates/def");
-        if(Auth::instance()->isAuth()){
-            $user_name = Auth::instance()->getCredentials()->getLogin();
-            $user_roles = Auth::instance()->getCredentials()->getRoles();
-            $view->user_roles = $user_roles;
-        }
-        else $user_name =  "non activ user";
-        if (isset($_SESSION["error"]))$view->error = $_SESSION["error"];
-        $view->user_name=$user_name;
-        $view->posts=Post::get();
+        $view->user_name=MainService::instance()->activUser();
+        $view->user_roles = MainService::instance()->activUserRole();
+        $view->posts=MainService::instance()->getPosts($this->getParam("catid"));
+        $view->menu_cat=MainService::instance()->getCategories();
+        $view->error=MainService::instance()->getError();
         Auth::instance()->delError();
         return $view;
     }
+
+    public function actionShowpost(){
+        $post_id = $this->getParam("postid");
+        $view = new TemplateView("post","templates/def");
+        $view->post = Post::where("post_id",$post_id)->first();
+        $view->post_id = $post_id;
+        $view->comments = Comment::where("post_id",$post_id)->get();
+        return $view;
+    }
+
     public function action404(){
         echo "404";
     }
@@ -42,31 +44,24 @@ class Main extends Controller
     }
     public function actionRegister(){
         $view = new TemplateView("register","templates/def");
+        $view->error=MainService::instance()->getError();
         return $view;
     }
     public function actionLogin(){
         $view = new TemplateView("login","templates/def");
+        $view->error=MainService::instance()->getError();
         return $view;
     }
     public function actionLoginhandle(){
-        $login = empty($_POST["login"])?null:$_POST["login"];
-        $password = empty($_POST["pass"])?null:$_POST["pass"];
-        if($login===null||$password===null){
-            Auth::instance()->errorMessagetoSession("some is empty");
-            return "redirect:/";
-        }
-        if(!Auth::instance()->login(new Credential($login,$password))){
-            Auth::instance()->errorMessagetoSession("invalid login or pass");
-            return "redirect:/";
-        }
+        $login =$_POST["pass"];
+        $password = $_POST["pass"];
+        MainService::instance()->loginProcess($login,$password);
         return "redirect:/";
     }
     public function actionRegisterhandle(){
-        $login = empty($_POST["login"])?null:$_POST["login"];
-        $password = empty($_POST["pass"])?null:$_POST["pass"];
-        if($login===null||$password===null) return "redirect:/main/register";
-        $encoded_pass = (new Md5PasswordEncoder)->encode($password);
-        (new User())->addUser($login,$encoded_pass);
-        return "redirect:/main/login";
+        $login = $_POST["login"];
+        $password = $_POST["pass"];
+        MainService::instance()->registerProcess($login,$password);
+        return "redirect:/";
     }
 }

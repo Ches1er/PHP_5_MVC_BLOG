@@ -1,4 +1,5 @@
 
+<div class="error"><?=$error?></div>
 <form action="/main/loginhandle" method="post">
     <input type="text" name="login">
     <input type="text" name="pass">

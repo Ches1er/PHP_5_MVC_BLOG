@@ -1,7 +1,11 @@
 <div class="menu">
     <ul class="main_menu">
         <li><a href="/">Main</a></li>
-        <li><ul class="category_menu"></ul>Категории</li>
+        <li>Категории<ul class="category_menu">
+                <?php foreach ($menu_cat as $cat):?>
+                <li><a href="/showcat/<?=$cat->category_id?>"><?=$cat->category_name?></a></li>
+                <?php endforeach;?>
+            </ul></li>
         <?php if (!empty($user_roles)):
                   foreach ($user_roles as $role):
                   if ($role==="admin"):?>
@@ -24,14 +28,24 @@
         </li>
     </ul>
 </div>
-<?php if (isset($error)):?>
+
+<!-- Errors -->
+
+<?php
+if (isset($error)):?>
 <div class="error"><?=$error?></div>
 <?php endif;?>
+
+<!-- Activ user -->
+
 <div class="activ_user"><?= $user_name?></div>
+
+<!-- All Posts -->
+
 <div class="posts">
     <?php if (!empty($posts)):
         foreach ($posts as $post):?>
-    <p><?=$post->post_name?></p>
+    <p><a href="\post\<?=$post->post_id?>"><?=$post->post_name?></a></p>
     <p><?=$post->author()->login?></p>
     <p><?=$post->data?></p>
     <p><?=$post->post_desc?></p>

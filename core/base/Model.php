@@ -89,6 +89,11 @@ abstract class Model
         return DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME)
             ->insert($cur_table,$data);
     }
+    protected function updateData($data,$where){
+        $cur_table = $this->currentTable();
+        DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME)->where($where[0],$where[1])
+            ->update($cur_table,$data);
+    }
     protected function getId($id_field,$identification_field,$value){
         $cur_table = $this->currentTable();
         return DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME)->

@@ -20,6 +20,9 @@ class User extends Model
         $last_id=$this->addData(["login"=>$login,"password"=>$password]);
         (new Users_roles())->addData(["user_id"=>$last_id,"role_id"=>2]);
     }
+    public function changeSign($login,$sign):void{
+        $this->updateData(["sign"=>$sign],["login",$login]);
+    }
     public function getUserIdByLogin($login){
         return ($this->getId("user_id","login",$login))["user_id"];
     }

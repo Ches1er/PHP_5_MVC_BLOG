@@ -52,7 +52,6 @@ CREATE TABLE comments
   comment_id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
   user_id int(11) NOT NULL,
   comment_desc tinytext NOT NULL,
-  tags varchar(255) NOT NULL,
   post_id int(11) NOT NULL,
   CONSTRAINT comments_users_user_id_fk FOREIGN KEY (user_id) REFERENCES users (user_id),
   CONSTRAINT comments_posts_post_id_fk FOREIGN KEY (post_id) REFERENCES posts (post_id)

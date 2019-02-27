@@ -58,4 +58,5 @@ class Route{
         if(empty($this->params[$name])) return $def;
         return $this->params[$name];
     }
+
 }

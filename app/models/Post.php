@@ -18,12 +18,13 @@ class Post extends Model
     public $data;
     public $post_name;
     public $post_desc;
+    public $post_full;
 
     protected static $table="posts";
 
-    public function addPost($user_id,$category_id,$data,$post_name,$post_desc){
+    public function addPost($user_id,$category_id,$data,$post_name,$post_desc,$post_full){
         $this->addData(["user_id"=>$user_id,"category_id"=>$category_id,
-            "data"=>$data,"post_name"=>$post_name,"post_desc"=>$post_desc]);
+            "data"=>$data,"post_name"=>$post_name,"post_desc"=>$post_desc,"post_full"=>$post_full]);
     }
     public function author(){
         return $this->belongsTo(User::class,"user_id","user_id");

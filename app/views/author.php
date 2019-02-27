@@ -11,10 +11,10 @@
         endif;?>
     </div>
     <div class="add_new_category">
-        <h2>Add new category</h2>
+        <h2>Add new post</h2>
         <form action="/myposts/addpost" method="post">
             <input type="text" name="post_name">
-            <textarea name="post_desc" id="" cols="30" rows="10"></textarea>
+            <textarea name="post_full" id="" cols="30" rows="5"></textarea>
             <select name="category_name" id="">
                 <?php foreach ($categories as $category): var_dump($categories)?>
                 <option value="<?= $category->category_id?>"><?= $category->category_name?></option>

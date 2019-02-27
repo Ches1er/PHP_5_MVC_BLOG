@@ -255,6 +255,7 @@ class DBQueryBuilder
         return $this->executor->executeInsert($q,$data);
     }
     public function update($table,array $data,array $params=[]){
+
         $where = $this->buildWhere();
         $list = implode(",",array_map(function ($f){
             return "`{$f}`=:_param_$f";

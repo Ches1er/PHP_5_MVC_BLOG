@@ -46,8 +46,6 @@ abstract class Controller
         return $this->getRoute()->getParam($name,$def);
     }
 
-
-
     const REDIRECT_INSTRUCTION = "redirect:";
 
     private function workInstruction($data)
@@ -74,7 +72,7 @@ abstract class Controller
         $this->header(self::HEADER_LOCATION,"/404");
     }
 
-    public static function getId(){
+    public static function getUserId(){
         $user_name = Auth::instance()->getCredentials()->getLogin();
         return ((new User)->getUserIdByLogin($user_name));
     }

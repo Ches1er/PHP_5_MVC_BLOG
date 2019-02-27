@@ -23,6 +23,6 @@ class Admin extends Controller
     public function actionAddcategory(){
         $category_name = $_POST["category_name"];
         (new Category())->addCategory($category_name);
-        return "redirect:/main/admin";
+        return "redirect:/admin";
     }
 }

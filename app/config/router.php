@@ -8,6 +8,10 @@ return [
             "controller" => "main",
             "action" => "index",
         ]),
+        new Route("showcat/{catid}", [
+            "controller" => "main",
+            "action" => "index",
+        ]),
         new Route("todo/{x}",[
             "controller"=>"api",
             "action"=>"todo",
@@ -74,6 +78,7 @@ return [
             "role"=>"user"
         ]),
 
+
         //Profile
 
         new Route("profile",[
@@ -83,5 +88,34 @@ return [
             "secure"=>true,
             "role"=>"user"
         ]),
+        new Route("addpic",[
+            "controller" => "profile",
+            "action" => "addpic",
+        ],[
+            "secure"=>true,
+            "role"=>"user"
+        ]),
+        new Route("changesign",[
+            "controller" => "profile",
+            "action" => "changesign",
+        ],[
+            "secure"=>true,
+            "role"=>"user"
+        ]),
+
+
+        //Show posts
+
+        new Route("post/{postid}",[
+            "controller" => "main",
+            "action" => "showpost",
+        ]),
+
+        //Comments
+        new Route("comment/new",[
+            "controller" => "comment",
+            "action" => "new",
+        ]),
+
     ]
 ];
