@@ -16,8 +16,8 @@ class User extends Model
     public function posts(){
         return $this->hasMany(Post::class,"user_id")->get();
     }
-    public function addUser($login,$password):void{
-        $last_id=$this->addData(["login"=>$login,"password"=>$password]);
+    public function addUser($login,$password,$sign="Here is my sign",$upic_id=4):void{
+        $last_id=$this->addData(["login"=>$login,"password"=>$password,"sign"=>$sign,"upic_id"=>$upic_id]);
         (new Users_roles())->addData(["user_id"=>$last_id,"role_id"=>2]);
     }
     public function changeSign($login,$sign):void{
@@ -25,6 +25,9 @@ class User extends Model
     }
     public function getUserIdByLogin($login){
         return ($this->getId("user_id","login",$login))["user_id"];
+    }
+    public function getPicture(){
+        return $this->belongsTo(Upic::class,"upic_id","upic_id");
     }
 
 }

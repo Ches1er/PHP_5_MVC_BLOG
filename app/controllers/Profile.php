@@ -10,12 +10,19 @@ namespace app\controllers;
 
 
 use app\models\Upic;
+use app\Services\MainService;
 use core\auth\Auth;
 use core\base\Controller;
 use app\Services\ProfileService;
+use core\base\TemplateView;
 
 class Profile extends Controller
 {
+    public function actionIndex(){
+        $view = new TemplateView("profile","templates/def");
+        $view->user = MainService::instance()->activUser();
+        return $view;
+    }
     public function actionAddpic()
     {
         $uploaddir = 'img/';

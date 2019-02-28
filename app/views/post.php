@@ -13,8 +13,17 @@
         </div>
     <?php endforeach;?>
 </div>
+
 <form action="/comment/new" method="post">
     <textarea name="comment" id="" cols="30" rows="5"></textarea>
     <input type="hidden" name="post_id" value="<?=$post_id?>">
-    <input type="submit">
+    <?php if (!is_null($user)): ?>
+        <input type="submit">
+    <?php else:?>
+        <input type="submit" disabled="disabled">
+        <div class="comment_error">Для того, чтобы оставлять комментарии,
+            <a href="/main/login">войдите</a> на сайт или
+            <a href="/main/register">зарегистрируйтесь.</a>
+        </div>
+    <?php endif;?>
 </form>

@@ -33,11 +33,8 @@ class Author extends Controller
     }
     public function actionDeletepost(){
         $post_id = self::getParam("postid");
-        Post::where("post_id",$post_id)->delete();
+        (new Post)->delete($post_id);
         return "redirect:\myposts";
     }
-    public function actionProfile(){
-        $view = new TemplateView("profile","templates/def");
-        return $view;
-    }
+
 }

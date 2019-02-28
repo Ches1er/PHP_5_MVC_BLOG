@@ -5,6 +5,7 @@ use core\Application;
 define("ROOT_DIR",__DIR__."/../");
 define("CORE_DIR",ROOT_DIR."core/");
 define("APP_DIR",ROOT_DIR."app/");
+
 define("EXT",".php");
 
 function handle_error($errno, $errstr, $errfile, $errline){

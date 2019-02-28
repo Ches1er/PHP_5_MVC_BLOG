@@ -16,31 +16,21 @@ use core\auth\Credential;
 class InDBAuthProvider implements AuthProvider
 {
 
-    private $credentials=[];
-
-    /**
-     * InDBAuthProvider constructor.
-     * @param $credentials
-     */
     public function __construct()
     {
-        $this->credentials = DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME)
-        ->from("users")->all();
     }
-
 
     function getCredentials(string $login): ?Credential
     {
-        foreach ($this->credentials as $credential){
-            //Get roles
-            if($credential["login"]===$login){
-                $roles = array_map(function($f){
-                    return $f["role_name"];
-                },$this->getRoles($credential["user_id"]));
-                return new Credential($credential["login"],$credential["password"],$roles);
-            }
+        $credential = DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME)
+            ->from("users")->where("login",$login)->one();
+        if (!empty($credential)){
+            $roles = array_map(function($f){
+                return $f["role_name"];
+            },$this->getRoles($credential["user_id"]));
+            return new Credential($credential["login"],$credential["password"],$roles);
         }
-        return null;
+        else return null;
     }
 
     private function getRoles($id):?array{

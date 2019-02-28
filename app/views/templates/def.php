@@ -10,7 +10,7 @@
 </head>
 <body>
 <header>
-    <h1>Blog</h1>
+    <a href="/">Blog</a>
 </header>
 <section>
     <?=$content?>

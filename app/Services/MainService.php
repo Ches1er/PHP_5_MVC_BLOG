@@ -27,9 +27,11 @@ class MainService
     }
     public function activUser(){
         if(Auth::instance()->isAuth()){
-            return Auth::instance()->getCredentials()->getLogin();
+            $login=Auth::instance()->getCredentials()->getLogin();
+            $user = User::where("login",$login)->first();
+            return $user;
         }
-        else return "non activ user";
+        else return null;
     }
     public function activUserRole()
     {
@@ -55,31 +57,5 @@ class MainService
         return "";
     }
 
-    public function loginProcess($login, $password){
-        $login=empty($login)?null:$login;
-        $password=empty($password)?null:$password;
-        if($login===null||$password===null){
-            Auth::instance()->errorMessagetoSession("some is empty");
-            return "";
-        }
-        if(!Auth::instance()->login(new Credential($login,$password))){
-            Auth::instance()->errorMessagetoSession("invalid login or pass");
-            return "";
-        }
-        return "";
-    }
 
-    public function registerProcess($login,$password)
-    {
-        $login=empty($login)?null:$login;
-        $password=empty($password)?null:$password;
-        if($login===null||$password===null) {
-            Auth::instance()->errorMessagetoSession("some is empty try again");
-            return "";
-        }
-        $encoded_pass = (new Md5PasswordEncoder)->encode($password);
-        (new User())->addUser($login,$encoded_pass);
-        Auth::instance()->errorMessagetoSession("$login is registered");
-        return "";
-    }
 }

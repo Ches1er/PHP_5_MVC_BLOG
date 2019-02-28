@@ -63,6 +63,13 @@ abstract class Model
         return $current_table_class::$table;
     }
 
+    protected function hasAmount($class,$count_field,$where_field){
+        return DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME,$class)
+            ->select(["COUNT($count_field)"])->from($class::$table)
+                ->where($where_field,$this->$where_field)
+                    ->one()["COUNT($count_field)"];
+    }
+
     protected function belongsTo($class,$current_key=null,$far_key="id"){
         if($current_key===null) $current_key = $class::$table."_id";
         return DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME,$class)
@@ -87,6 +94,11 @@ abstract class Model
         $cur_table = $this->currentTable();
         return DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME)
             ->insert($cur_table,$data);
+    }
+    protected function delData($where){
+        $cur_table = $this->currentTable();
+        DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME)->where($where[0],$where[1])
+            ->delete($cur_table);
     }
     protected function updateData($data,$where){
         $cur_table = $this->currentTable();

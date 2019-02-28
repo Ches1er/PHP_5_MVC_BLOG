@@ -16,7 +16,7 @@ class Main extends Controller
 {
     public function actionIndex(){
         $view = new TemplateView("main","templates/def");
-        $view->user_name=MainService::instance()->activUser();
+        $view->user=MainService::instance()->activUser();
         $view->user_roles = MainService::instance()->activUserRole();
         $view->posts=MainService::instance()->getPosts($this->getParam("caturl"));
         $view->menu_cat=MainService::instance()->getCategories();
@@ -31,6 +31,10 @@ class Main extends Controller
         $view->post = Post::where("post_id",$post_id)->first();
         $view->post_id = $post_id;
         $view->comments = Comment::where("post_id",$post_id)->get();
+
+/*        var_dump(Comment::select(["COUNT(`comment_id`)"])
+            ->from("comments")->where("post_id",$post_id)->one());*/
+        $view->user=MainService::instance()->activUser();
         return $view;
     }
 
@@ -51,17 +55,5 @@ class Main extends Controller
         $view = new TemplateView("login","templates/def");
         $view->error=MainService::instance()->getError();
         return $view;
-    }
-    public function actionLoginhandle(){
-        $login =$_POST["pass"];
-        $password = $_POST["pass"];
-        MainService::instance()->loginProcess($login,$password);
-        return "redirect:/";
-    }
-    public function actionRegisterhandle(){
-        $login = $_POST["login"];
-        $password = $_POST["pass"];
-        MainService::instance()->registerProcess($login,$password);
-        return "redirect:/";
     }
 }

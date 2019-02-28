@@ -32,7 +32,7 @@ return [
             "action" => "login",
         ]),
         new Route("main/loginhandle",[
-            "controller" => "main",
+            "controller" => "login_registr",
             "action" => "loginhandle",
         ]),
         new Route("main/logout",[
@@ -44,7 +44,7 @@ return [
             "action" => "register",
         ]),
         new Route("main/registerhandle",[
-            "controller" => "main",
+            "controller" => "login_registr",
             "action" => "registerhandle",
         ]),
 
@@ -89,8 +89,8 @@ return [
         //Profile
 
         new Route("profile",[
-            "controller" => "author",
-            "action" => "profile",
+            "controller" => "profile",
+            "action" => "index",
         ],[
             "secure"=>true,
             "role"=>"user"

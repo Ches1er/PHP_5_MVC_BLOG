@@ -29,4 +29,10 @@ class Post extends Model
     public function author(){
         return $this->belongsTo(User::class,"user_id","user_id");
     }
+    public function delete($post_id){
+        $this->delData(["post_id",$post_id]);
+    }
+    public function hasAmountComments(){
+        return $this->hasAmount(Comment::class,"comment_id","post_id");
+    }
 }
