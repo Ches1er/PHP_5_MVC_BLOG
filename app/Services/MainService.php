@@ -10,12 +10,11 @@ use app\models\Category;
 use app\models\Post;
 use app\models\User;
 use core\auth\Auth;
-use core\auth\Credential;
-use core\auth\implementation\encoders\Md5PasswordEncoder;
 
 class MainService
 {
     private static $ins = null;
+    const POSTS_PER_PAGE = 5;
 
     public static function instance()
     {
@@ -47,15 +46,29 @@ class MainService
         return [];
     }
 
-    public function getPosts($category_url){
-        if ($category_url===null) return Post::get();
-        return Category::where("category_url",$category_url)->first()->posts();
+    /*Считаем кол-во постов для пагинации: для главной, считаем все,
+        если приезжает категория, то другим методом, для категорий
+    */
+    public function postsCount($category_url){
+        if ($category_url===null)return (integer)(new Post())->hasAmountPostsAll();
+        return (integer)(new Post())->hasAmountPostsCategory($category_url);
+    }
+
+    /*
+     * Получаем посты. Кол-во постов задаем в константу POSTS_PER_PAGE
+     *  Получаем страницу, основываясь на значении константы,
+     * получаем список постов.
+     */
+    public function getPosts($category_url,$page){
+        $page===1?$offset = 0:$offset=$page*self::POSTS_PER_PAGE-self::POSTS_PER_PAGE;
+        $postPerPage = self::POSTS_PER_PAGE;
+        if ($category_url===null) return Post::getWithOffset($postPerPage,$offset);
+        return Category::where("category_url",$category_url)->first()->posts($postPerPage,$offset);
     }
 
     public function getError(){
         if (isset($_SESSION["error"]))return $_SESSION["error"];
         return "";
     }
-
 
 }

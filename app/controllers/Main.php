@@ -15,10 +15,13 @@ use core\base\TemplateView;
 class Main extends Controller
 {
     public function actionIndex(){
+        isset($_GET["page"])?$page=$_GET["page"]:$page=1;
         $view = new TemplateView("main","templates/def");
         $view->user=MainService::instance()->activUser();
         $view->user_roles = MainService::instance()->activUserRole();
-        $view->posts=MainService::instance()->getPosts($this->getParam("caturl"));
+        $view->number_of_posts =MainService::instance()->postsCount($this->getParam("caturl"));
+        $view->posts_per_page = MainService::POSTS_PER_PAGE;
+        $view->posts=MainService::instance()->getPosts($this->getParam("caturl"),$page);
         $view->menu_cat=MainService::instance()->getCategories();
         $view->error=MainService::instance()->getError();
         Auth::instance()->delError();
@@ -28,12 +31,10 @@ class Main extends Controller
     public function actionShowpost(){
         $post_id = $this->getParam("postid");
         $view = new TemplateView("post","templates/def");
+        $view->user_roles = MainService::instance()->activUserRole();
         $view->post = Post::where("post_id",$post_id)->first();
         $view->post_id = $post_id;
         $view->comments = Comment::where("post_id",$post_id)->get();
-
-/*        var_dump(Comment::select(["COUNT(`comment_id`)"])
-            ->from("comments")->where("post_id",$post_id)->one());*/
         $view->user=MainService::instance()->activUser();
         return $view;
     }

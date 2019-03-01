@@ -33,6 +33,13 @@ class Post extends Model
         $this->delData(["post_id",$post_id]);
     }
     public function hasAmountComments(){
-        return $this->hasAmount(Comment::class,"comment_id","post_id");
+        return $this->hasAmountWhere(Comment::class,"comment_id","post_id");
+    }
+    public function hasAmountPostsAll(){
+        return $this->hasAmount("post_id");
+    }
+    public function hasAmountPostsCategory($category_url){
+        $category_id = Category::where("category_url",$category_url)->first()->category_id;
+        return $this->hasAmountWhere(Post::class,"post_id","category_id",$category_id);
     }
 }

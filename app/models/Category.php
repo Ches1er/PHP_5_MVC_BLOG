@@ -18,8 +18,9 @@ class Category extends \core\base\Model
     public function addCategory($cat_name){
         $this->addData(["category_name"=>$cat_name]);
     }
-    public function posts(){
-        return $this->hasMany(Post::class,"category_id","category_id")->get();
+    public function posts($postPerPage,$offset){
+        return $this->hasMany(Post::class,"category_id","category_id")
+            ->limit($postPerPage,$offset)->get();
     }
 
 }

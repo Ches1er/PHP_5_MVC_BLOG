@@ -14,9 +14,11 @@ use core\auth\Auth;
 
 class ProfileService
 {
-    public static function addPicProcess($path){
+    public static function addPicProcess($login,$path){
+
         if (move_uploaded_file($_FILES['userfile']['tmp_name'], $path)) {
-            (new Upic())->addPic($path);
+            $pic_id=(new Upic())->addPic($path);
+            (new User())->changeAvatar($login,$pic_id);
             return "";
         } else {
             Auth::instance()->errorMessageToSession("Picture wasnt loaded");

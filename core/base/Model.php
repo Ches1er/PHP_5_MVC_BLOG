@@ -24,6 +24,11 @@ abstract class Model
         return DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME,$class)
             ->from($class::$table)->get();
     }
+    public static function getWithOffset($limit,$offset){
+        $class = get_called_class();
+        return DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME,$class)
+            ->from($class::$table)->limit($limit,$offset)->get();
+    }
     private function parseFields(){
         $class = new \ReflectionClass(get_class($this));
         $fields = $class->getProperties();
@@ -63,10 +68,18 @@ abstract class Model
         return $current_table_class::$table;
     }
 
-    protected function hasAmount($class,$count_field,$where_field){
+    protected function hasAmount($count_field){
+        $class = get_class($this);
         return DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME,$class)
             ->select(["COUNT($count_field)"])->from($class::$table)
-                ->where($where_field,$this->$where_field)
+            ->one()["COUNT($count_field)"];
+    }
+
+    protected function hasAmountWhere($class, $count_field, $where_field,$where_field_value=null){
+        $where_field_value===null?$wfv=$this->$where_field:$wfv=$where_field_value;
+        return DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME,$class)
+            ->select(["COUNT($count_field)"])->from($class::$table)
+                ->where($where_field,$wfv)
                     ->one()["COUNT($count_field)"];
     }
 

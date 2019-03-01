@@ -19,6 +19,6 @@ class Upic extends Model
     protected static $table="upic";
 
     public function addPic($path){
-        $this->addData(["path"=>$path]);
+        return $this->addData(["path"=>$path]);
     }
 }

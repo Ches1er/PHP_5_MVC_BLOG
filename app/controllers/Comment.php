@@ -20,6 +20,6 @@ class Comment extends Controller
         $user_id=self::getUserId();
         $post_id = $_POST["post_id"];
         (new \app\models\Comment())->addComment($user_id,$comment,$post_id);
-        return "redirect:/";
+        return "redirect:back";
     }
 }

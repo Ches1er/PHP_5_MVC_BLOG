@@ -27,7 +27,8 @@ class Profile extends Controller
     {
         $uploaddir = 'img/';
         $uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
-        ProfileService::addPicProcess($uploadfile);
+        $login = Auth::instance()->getCredentials()->getLogin();
+        ProfileService::addPicProcess($login,$uploadfile);
         return "redirect:/profile";
     }
     public function actionChangesign(){
