@@ -23,5 +23,8 @@ class Comment extends \core\base\Model
     }
     public function addComment($user_id,$comment_desc,$post_id){
         $this->addData(["user_id"=>$user_id,"comment_desc"=>$comment_desc,"post_id"=>$post_id]);
-}
+    }
+    public function delete($comment_id){
+       $this->delData(["comment_id",$comment_id]);
+    }
 }

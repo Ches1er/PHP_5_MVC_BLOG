@@ -123,6 +123,10 @@ return [
             "controller" => "comment",
             "action" => "new",
         ]),
+        new Route("post/commentdel/{commentid}",[
+            "controller" => "comment",
+            "action" => "delete",
+        ]),
 
     ]
 ];

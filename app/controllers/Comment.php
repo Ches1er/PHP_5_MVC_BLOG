@@ -22,4 +22,9 @@ class Comment extends Controller
         (new \app\models\Comment())->addComment($user_id,$comment,$post_id);
         return "redirect:back";
     }
+    public function actionDelete(){
+        $comment_id=$this->getParam("commentid");
+        (new \app\models\Comment())->delete($comment_id);
+        return "redirect:back";
+    }
 }

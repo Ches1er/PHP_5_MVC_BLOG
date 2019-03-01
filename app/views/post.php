@@ -4,9 +4,9 @@
 <nav>
     <ul class="main_menu">
         <li><a href="/">Main</a></li>
-        <?php if (!empty($user_roles)):
-            foreach ($user_roles as $role):
-                if ($role==="admin"):?>
+        <?php if (!empty($user_roles)):?>
+            <?php foreach ($user_roles as $role):?>
+                <?php if ($role==="admin"):?>
                     <li><a href="/admin">Admin</a></li>
                     <li><a href="/profile">User Profile</a></li>
                     <li><a href="/myposts">My Posts</a></li>
@@ -63,6 +63,9 @@
         <div class="comment">
             <div class="comment_desc"><?=$comment->author()->login." : ".$comment->comment_desc?></div>
             <div class="comment_author"></div>
+            <?php if ($role==="admin"):?>
+            <a href="commentdel/<?=$comment->comment_id?>" class="comment_delete">Del</a>
+            <?php endif;?>
         </div>
     <?php endforeach;?>
 </div>
