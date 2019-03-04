@@ -1,28 +1,25 @@
-
 <!-- Navigation -->
 
 <nav>
     <ul class="main_menu">
         <li><a href="/">Main</a></li>
-        <?php if (!is_null($user_roles)):?>
-            <?php foreach ($user_roles as $role):?>
-                <?php if ($role==="admin"):?>
-                    <li><a href="/admin">Admin</a></li>
-                    <li><a href="/profile">User Profile</a></li>
-                    <li><a href="/myposts">My Posts</a></li>
-                <?php elseif ($role==="user")  :?>
-                    <li><a href="/profile">User Profile</a></li>
-                    <li><a href="/myposts">My Posts</a></li>
-                <?php endif; ?>
-            <?php endforeach;?>
-        <?php endif;?>
+        <?php if (!empty($user_roles)):
+            if (in_array("admin", $user_roles)):?>
+                <li><a href="/admin">Admin</a></li>
+                <li><a href="/profile">User Profile</a></li>
+                <li><a href="/myposts">My Posts</a></li>
+            <?php elseif (in_array("user", $user_roles))  : ?>
+                <li><a href="/profile">User Profile</a></li>
+                <li><a href="/myposts">My Posts</a></li>
+            <?php endif; ?>
+        <?php endif; ?>
 
-        <?php if (is_null($user)):?>
+        <?php if (is_null($user)): ?>
             <li><a href="/main/register">Sign Up</a></li>
             <li><a href="/main/login">Sign In</a></li>
-        <?php else:?>
+        <?php else: ?>
             <li><a href="/main/logout">Logout</a></li>
-        <?php endif;?>
+        <?php endif; ?>
 
     </ul>
 
@@ -30,17 +27,17 @@
     <!-- Activ user -->
 
     <div class="activ_user">
-        <?php if (!is_null($user)):?>
-            <div class="cur_user_name"><?= "Current user: ".$user->login?></div>
+        <?php if (!is_null($user)): ?>
+            <div class="cur_user_name"><?= "Current user: " . $user->login ?></div>
             <div class="cur_user_img">
-                <img class="small_avatar" src="<?="/".$user->getPicture()->path?>" alt="">
+                <img class="small_avatar" src="<?= "/" . $user->getPicture()->path ?>" alt="">
             </div>
-        <?php else:?>
-            <div class="cur_user_name"><?="Current user: none"?></div>
+        <?php else: ?>
+            <div class="cur_user_name"><?= "Current user: none" ?></div>
             <div class="cur_user_img">
                 <img class="small_avatar" src="/img/inactive.png" alt="">
             </div>
-        <?php endif;?>
+        <?php endif; ?>
     </div>
 
 </nav>
@@ -63,9 +60,8 @@
     <?php foreach ($comments as $comment):?>
         <div class="comment">
             <div class="comment_desc"><?=$comment->author()->login." : ".$comment->comment_desc?></div>
-            <div class="comment_author"></div>
             <?php if (!is_null($user_roles) && in_array("admin",$user_roles)):?>
-            <a href="commentdel/<?=$comment->comment_id?>" class="comment_delete">Del</a>
+            <a href="commentdel/<?=$comment->comment_id?>" class="comment_delete">X</a>
             <?php endif;?>
         </div>
     <?php endforeach;?>

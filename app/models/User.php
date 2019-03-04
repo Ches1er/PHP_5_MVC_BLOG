@@ -29,6 +29,9 @@ class User extends Model
     public function changeSign($login,$sign):void{
         $this->updateData(["sign"=>$sign],["login",$login]);
     }
+    public function changeLogin($old_login,$new_login):void{
+        $this->updateData(["login"=>$new_login],["login",$old_login]);
+    }
     public function changeAvatar($login,$upic_id):void{
         $this->updateData(["upic_id"=>$upic_id],["login",$login]);
     }

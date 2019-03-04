@@ -30,11 +30,11 @@ class LoginRegistrService
         $login=empty($login)?null:$login;
         $password=empty($password)?null:$password;
         if($login===null||$password===null){
-            Auth::instance()->errorMessagetoSession("some is empty");
+            Auth::instance()->errorMessagetoSession("Заполните все поля");
             return "";
         }
         if(!Auth::instance()->login(new Credential($login,$password))){
-            Auth::instance()->errorMessagetoSession("invalid login or pass");
+            Auth::instance()->errorMessagetoSession("Неверный логин или пароль");
             return "";
         }
         return "";

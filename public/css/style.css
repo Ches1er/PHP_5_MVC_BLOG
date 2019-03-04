@@ -8,9 +8,10 @@ section,header,footer{
     background-color: #ffeeb2;
     box-sizing: border-box;
     border-radius: 5px;
+    border: dodgerblue 1px solid;
 }
 header,footer {
-    margin-top: 10px;
+    margin-top: 5px;
     height: 50px;
 }
 footer {
@@ -32,7 +33,9 @@ h2{
     font-size: unset;
 }
 .error{
-
+    color: red;
+    margin-top: 5px;
+    font-size: larger;
 }
     /*Header*/
 
@@ -87,6 +90,10 @@ nav{
     flex-flow: row nowrap;
     justify-content: flex-end;
     padding-right: 10px;
+}
+.cur_user_name{
+    margin-top: 3px;
+    margin-right: 5px;
 }
 
     /*Container*/
@@ -211,6 +218,14 @@ aside a:hover {
     border-radius: 2px;
     padding: 5px;
     margin-bottom: 5px;
+    display: inline-flex;
+    flex-flow: row nowrap;
+}
+.comment_desc{
+    width: 900px;
+}
+.comment_delete{
+    display: inline-block;
 }
 
     /*Add comments*/
@@ -293,14 +308,24 @@ select,input[name="Add post"]{
     box-sizing: border-box;
     width: 100%;
     display: inline-block;
+    flex-flow: row nowrap;
     background-color: #f4d18a;
     padding: 10px 15px;
     box-shadow: 2px 2px 3px 0px rgba(107,107,107,1);
     border-radius: 5px;
 }
+.admin_content{
+    display: inline-flex;
+    flex-flow: row nowrap;
+
+}
+.admin_categories,.admin_find_users{
+    display: inline-flex;
+    flex-flow: column nowrap;
+    margin-right: 10px;
+}
 .admin_unit{
     box-sizing: border-box;
-    width: 100%;
     display: inline-block;
     background-color: #f4d18a;
     padding: 10px 15px;

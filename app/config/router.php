@@ -61,6 +61,20 @@ return [
             "secure"=>true,
             "role"=>"admin"
         ]),
+        new Route("admin/finduser",[
+            "controller" => "admin",
+            "action" => "finduser",
+        ],[
+            "secure"=>true,
+            "role"=>"admin"
+        ]),
+        new Route("admin/changeuser",[
+            "controller" => "admin",
+            "action" => "changeuser",
+        ],[
+            "secure"=>true,
+            "role"=>"admin"
+        ]),
 
             //Author action
 
