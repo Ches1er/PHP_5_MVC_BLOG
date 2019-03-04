@@ -23,6 +23,10 @@ return [
             "secure"=>true,
             "role"=>"admin"
         ]),
+        new Route("main/sort/{criteria}", [
+            "controller" => "main",
+            "action" => "index",
+        ]),
 
 
         //LOGIN and REGISTER

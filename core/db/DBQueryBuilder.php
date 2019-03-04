@@ -121,9 +121,9 @@ class DBQueryBuilder
         return $q;
     }
     //ORDER BY
-    public function orderBY(string $column,string $direction=null){
-        $this->quury_parts["order"][]=$column;
-        $this->quury_parts["order"][]=$direction;
+    public function orderBY(string $column,string $direction="desc"){
+        $this->quury_parts["order"][]=self::_field($column);
+        $this->quury_parts["order"][]=mb_strtoupper($direction);
         return $this;
     }
     private function buildOrderBy():string{

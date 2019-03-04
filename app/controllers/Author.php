@@ -10,6 +10,7 @@ namespace app\controllers;
 
 use app\models\Category;
 use app\models\Post;
+use app\Services\MainService;
 use core\base\Controller;
 use core\base\TemplateView;
 
@@ -19,6 +20,7 @@ class Author extends Controller
         $view = new TemplateView("author","templates/def");
         $view->posts = Post::where("user_id",self::getUserId())->get();
         $view->categories = Category::get();
+        $view->user=MainService::instance()->activUser();
         return $view;
     }
     public function actionAddpost(){

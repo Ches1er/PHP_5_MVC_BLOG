@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Srisakdi" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Laila" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
@@ -16,6 +17,11 @@
     <a href="/">My Blog</a>
 </header>
 <section>
+    <script type="text/javascript" src="http://js.nicedit.com/nicEdit-latest.js"></script> <script type="text/javascript">
+        //<![CDATA[
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+        //]]>
+    </script>
     <?=$content?>
 </section>
 <footer>

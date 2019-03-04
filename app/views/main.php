@@ -61,6 +61,7 @@
 
 <aside>
     <ul class="category_menu">
+        <li><a href="/showcat/all"</a>All</li>
         <?php foreach ($menu_cat as $cat):?>
             <li><a href="/showcat/<?=$cat->category_url?>"><?=$cat->category_name?></a></li>
         <?php endforeach;?>
@@ -69,7 +70,11 @@
 
 <!-- All Posts -->
 
-<article>
+<article class="all_posts">
+    <!--<div class="sort">Сортировка по дате:
+            <a href="/main/sort/desc">сначала старые  </a>
+            <a href="/main/sort/asc">сначала новые</a>
+    </div>-->
     <?php if (!empty($posts)):?>
         <?php foreach ($posts as $post):?>
             <div class="main_post">

@@ -50,7 +50,7 @@ class MainService
         если приезжает категория, то другим методом, для категорий
     */
     public function postsCount($category_url){
-        if ($category_url===null)return (integer)(new Post())->hasAmountPostsAll();
+        if ($category_url===null||$category_url==="all")return (integer)(new Post())->hasAmountPostsAll();
         return (integer)(new Post())->hasAmountPostsCategory($category_url);
     }
 
@@ -62,7 +62,13 @@ class MainService
     public function getPosts($category_url,$page){
         $page===1?$offset = 0:$offset=$page*self::POSTS_PER_PAGE-self::POSTS_PER_PAGE;
         $postPerPage = self::POSTS_PER_PAGE;
-        if ($category_url===null) return Post::getWithOffset($postPerPage,$offset);
+        if ($category_url===null||$category_url==="all") return Post::getWithOffset($postPerPage,$offset);
+        return Category::where("category_url",$category_url)->first()->posts($postPerPage,$offset);
+    }
+    public function getPostsSort($category_url,$page,$sort_criteria){
+        $page===1?$offset = 0:$offset=$page*self::POSTS_PER_PAGE-self::POSTS_PER_PAGE;
+        $postPerPage = self::POSTS_PER_PAGE;
+        if ($category_url===null) return Post::getWithOffsetSort($postPerPage,$offset,"data",$sort_criteria);
         return Category::where("category_url",$category_url)->first()->posts($postPerPage,$offset);
     }
 

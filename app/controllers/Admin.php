@@ -10,6 +10,7 @@ namespace app\controllers;
 
 
 use app\models\Category;
+use app\Services\MainService;
 use core\base\Controller;
 use core\base\TemplateView;
 
@@ -18,6 +19,7 @@ class Admin extends Controller
     public function actionIndex(){
         $view = new TemplateView("admin","templates/def");
         $view->categories = Category::get();
+        $view->user=MainService::instance()->activUser();
         return $view;
     }
     public function actionAddcategory(){

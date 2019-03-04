@@ -22,7 +22,18 @@ section {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+h1,h2{
+    color: #1864b7;
+    text-indent: 20px;
+    margin: 15px 0;
+    font-family: 'Fira Sans', sans-serif;
+}
+h2{
+    font-size: unset;
+}
+.error{
 
+}
     /*Header*/
 
 header a{
@@ -39,9 +50,16 @@ header a{
 
 
     /*Menu*/
-
+nav{
+    box-shadow: 2px 2px 3px 0px rgba(107,107,107,1);
+    border-radius: 5px;
+}
 .main_menu,.auth_menu{
+    margin: 10px 0 0 5px;
     list-style: none;
+}
+.main_menu li{
+    margin: 0 15px ;
 }
 .main_menu li,.auth_menu li{
     display: inline-block;
@@ -55,15 +73,7 @@ header a{
     color: #165eac;
 
 }
-.main_menu>li{
 
-    padding: 10px;
-    border-left: dodgerblue 1px solid;
-}
-.main_menu>li:last-child{
-
-    border-left: none;
-}
 .auth_menu>li:last-child{
     margin-left: 10px;
 }
@@ -72,10 +82,11 @@ header a{
     height: 25px;
 }
 .activ_user{
-    width: 100%;
+    width: 890px;
     display: inline-flex;
     flex-flow: row nowrap;
     justify-content: flex-end;
+    padding-right: 10px;
 }
 
     /*Container*/
@@ -118,13 +129,23 @@ aside a:hover {
 
     /*Article*/
 
-article{
+.all_posts{
     width: 730px;
     display: inline-block;
     margin-left: 10px;
     background-color: #f4d18a;
     padding: 10px 15px;
     box-shadow: 2px 2px 3px 0px rgba(107,107,107,1);
+    border-radius: 5px;
+}
+.post_container{
+    width: 100%;
+    margin-top: 15px;
+    padding: 5px;
+    box-shadow: inset 1px 1px 1px 0px rgba(107,107,107,1);
+    border-radius: 2px;
+    display: inline-flex;
+    flex-flow: column nowrap;
     border-radius: 5px;
 }
 .full_post{
@@ -185,6 +206,12 @@ article{
 .comments{
     margin-top: 15px;
 }
+.comment{
+    border: #1a72ce 1px dotted;
+    border-radius: 2px;
+    padding: 5px;
+    margin-bottom: 5px;
+}
 
     /*Add comments*/
 
@@ -195,9 +222,105 @@ form{
     display: inline-flex;
     flex-flow: column nowrap;
 }
-input[type="submit"]{
+.comment_new>form>input[type="submit"]{
     margin: 10px 0;
     width: 100px;
 }
+
+    /*Profile*/
+
+.profile_container
+{
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 5px;
+    box-shadow: inset 1px 1px 1px 0px rgba(107,107,107,1);
+    border-radius: 2px;
+    display: inline-flex;
+    flex-flow: column nowrap;
+    border-radius: 5px;
+}
+.profile_container>div{
+    box-sizing: border-box;
+    width: 100%;
+    display: inline-block;
+    margin-bottom: 10px;
+    background-color: #f4d18a;
+    padding: 10px 15px;
+    box-shadow: 2px 2px 3px 0px rgba(107,107,107,1);
+    border-radius: 5px;
+}
+.profile_container input[type="submit"]{
+    width: 150px;
+    margin-top: 5px;
+}
+
+    /*Author*/
+
+.my_posts{
+    box-sizing: border-box;
+    width: 100%;
+    display: inline-block;
+    background-color: #f4d18a;
+    padding: 10px 15px;
+    box-shadow: 2px 2px 3px 0px rgba(107,107,107,1);
+    border-radius: 5px;
+}
+.my_posts>.main_post{
+    width: 100%;
+}
+.add_new_post{
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 5px;
+    box-shadow: inset 1px 1px 1px 0px rgba(107,107,107,1);
+    border-radius: 2px;
+    display: inline-flex;
+    flex-flow: column nowrap;
+    border-radius: 5px;
+}
+input,select{
+    margin: 5px 0;
+}
+select,input[name="Add post"]{
+    width: 200px;
+}
+
+    /*Admin*/
+
+.adminka{
+    margin-top: 15px;
+    box-sizing: border-box;
+    width: 100%;
+    display: inline-block;
+    background-color: #f4d18a;
+    padding: 10px 15px;
+    box-shadow: 2px 2px 3px 0px rgba(107,107,107,1);
+    border-radius: 5px;
+}
+.admin_unit{
+    box-sizing: border-box;
+    width: 100%;
+    display: inline-block;
+    background-color: #f4d18a;
+    padding: 10px 15px;
+    box-shadow: 2px 2px 3px 0px rgba(107,107,107,1);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+    /*Login-register*/
+
+.login_register{
+    margin-top: 15px;
+    box-sizing: border-box;
+    width: 100%;
+    display: inline-block;
+    background-color: #f4d18a;
+    padding: 10px 15px;
+    box-shadow: 2px 2px 3px 0px rgba(107,107,107,1);
+    border-radius: 5px;
+}
+
 
 

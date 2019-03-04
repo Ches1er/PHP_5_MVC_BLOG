@@ -4,7 +4,7 @@
 <nav>
     <ul class="main_menu">
         <li><a href="/">Main</a></li>
-        <?php if (!empty($user_roles)):?>
+        <?php if (!is_null($user_roles)):?>
             <?php foreach ($user_roles as $role):?>
                 <?php if ($role==="admin"):?>
                     <li><a href="/admin">Admin</a></li>
@@ -47,7 +47,7 @@
 
     <!-- Article-->
 
-
+<div class="post_container">
 <div class="full_post">
     <div class="text">
         <div class="post_name"><a href="\post\<?=$post->post_id?>"><?=$post->post_name?></a></div>
@@ -59,18 +59,22 @@
 </div>
 <hr>
 <div class="comments">
+    <h2>Комментарии пользователей</h2>
     <?php foreach ($comments as $comment):?>
         <div class="comment">
             <div class="comment_desc"><?=$comment->author()->login." : ".$comment->comment_desc?></div>
             <div class="comment_author"></div>
-            <?php if ($role==="admin"):?>
+            <?php if (!is_null($user_roles) && in_array("admin",$user_roles)):?>
             <a href="commentdel/<?=$comment->comment_id?>" class="comment_delete">Del</a>
             <?php endif;?>
         </div>
     <?php endforeach;?>
 </div>
 
+
 <div class="comment_new">
+    <hr>
+    <h2>Оставить комментарий к статье</h2>
 <form  action="/comment/new" method="post">
     <textarea name="comment" id="" cols="30" rows="5"></textarea>
     <input type="hidden" name="post_id" value="<?=$post_id?>">
@@ -84,4 +88,5 @@
         </div>
     <?php endif;?>
 </form>
+</div>
 </div>

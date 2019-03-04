@@ -29,6 +29,11 @@ abstract class Model
         return DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME,$class)
             ->from($class::$table)->limit($limit,$offset)->get();
     }
+    public static function getWithOffsetSort($limit,$offset,$sort_column,$sort_direction){
+        $class = get_called_class();
+        return DBQueryBuilder::create(DBQueryBuilder::DEF_CONFIG_NAME,$class)
+            ->from($class::$table)->orderBY($sort_column,$sort_direction)->limit($limit,$offset)->get();
+    }
     private function parseFields(){
         $class = new \ReflectionClass(get_class($this));
         $fields = $class->getProperties();
