@@ -24,6 +24,8 @@ class Admin extends Controller
         $view->categories = Category::get();
         $view->user=MainService::instance()->activUser();
         $view->finduser=AdminService::instance()->findUser($login);
+        $view->error=MainService::instance()->getError();
+        Auth::instance()->delError();
         return $view;
     }
     public function actionAddcategory(){

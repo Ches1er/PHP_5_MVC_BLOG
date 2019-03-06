@@ -55,8 +55,8 @@ class MainService
     }
 
     /*
-     * Получаем посты. Кол-во постов задаем в константу POSTS_PER_PAGE
-     *  Получаем страницу, основываясь на значении константы,
+     * Получаем посты. Кол-во постов на странице задаем в константу POSTS_PER_PAGE
+     * Получаем страницу, основываясь на значении константы,
      * получаем список постов.
      */
     public function getPosts($category_url,$page){
@@ -74,7 +74,7 @@ class MainService
 
     public function getError(){
         if (isset($_SESSION["error"]))return $_SESSION["error"];
-        return "";
+        return null;
     }
 
 }

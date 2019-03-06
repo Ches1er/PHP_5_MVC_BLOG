@@ -27,6 +27,14 @@
 
 <!-- Error -->
 
+<div class="error">
+    <?php if (!is_null($error)): ?>
+        <p class="error_message"></p><?= $error ?>
+    <?php endif; ?>
+</div>
+
+<!-- Aticle-->
+
 <article class="adminka">
 <h1>Админка</h1>
     <div class="admin_content">

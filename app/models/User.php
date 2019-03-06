@@ -22,9 +22,17 @@ class User extends Model
      * Role_id по умолчанию 2, т.е. простой юзер.
      * */
 
-    public function addUser($login,$password,$sign="Here is my sign",$upic_id=4):void{
+    private function isLoginEngaged(string $login){
+        return ((new User())::where("login",$login)->one());
+    }
+
+    public function addUser($login,$password,$sign="Here is my sign",$upic_id=4){
+        if($this->isLoginEngaged($login)) {
+            return false;
+        }
         $last_id=$this->addData(["login"=>$login,"password"=>$password,"sign"=>$sign,"upic_id"=>$upic_id]);
         (new Users_roles())->addData(["user_id"=>$last_id,"role_id"=>2]);
+        return true;
     }
     public function changeSign($login,$sign):void{
         $this->updateData(["sign"=>$sign],["login",$login]);

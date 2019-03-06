@@ -45,12 +45,16 @@ class LoginRegistrService
         $login=empty($login)?null:$login;
         $password=empty($password)?null:$password;
         if($login===null||$password===null) {
-            Auth::instance()->errorMessagetoSession("some is empty try again");
+            Auth::instance()->errorMessagetoSession("Заполните все поля");
             return "";
         }
         $encoded_pass = (new Md5PasswordEncoder)->encode($password);
-        (new User())->addUser($login,$encoded_pass);
-        Auth::instance()->errorMessagetoSession("$login is registered");
-        return "";
+        if((new User())->addUser($login,$encoded_pass)){
+            return "";
+        }
+        else{
+            Auth::instance()->errorMessagetoSession("$login уже зарегистрирован");
+            return "";
+        }
     }
 }
