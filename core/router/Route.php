@@ -31,7 +31,7 @@ class Route{
         return @$this->params["controller"];
     }
     public function getSecured(){
-        return empty($this->secure["secured"])?false:$this->secure["secured"];
+        return empty($this->secure["secure"])?false:$this->secure["secure"];
     }
     public function getRole(){
         return empty($this->secure["role"])?null:$this->secure["role"];

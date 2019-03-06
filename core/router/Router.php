@@ -35,9 +35,11 @@ class Router
                 }
                 else if ($secured && !Auth::instance()->hasRole($role)){
                     Auth::instance()->errorMessagetoSession("please sign in as admin!");
-                    $this->navigate($controller,"index",$route);
+                    $this->navigate("main","index",$route);
                 }
-                else $this->navigate($controller,$action,$route);
+                else {
+                    $this->navigate($controller,$action,$route);
+                }
                 return;
             }
         }
