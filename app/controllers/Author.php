@@ -18,14 +18,14 @@ class Author extends Controller
 {
     public function actionIndex(){
         $view = new TemplateView("author","templates/def");
-        $view->posts = Post::where("user_id",self::getUserId())->get();
+        $view->posts = Post::where("user_id",self::getUserId())->orderBy("data","desc")->get();
         $view->categories = Category::get();
         $view->user=MainService::instance()->activUser();
         return $view;
     }
     public function actionAddpost(){
         $category_id = $_POST["category_name"];
-        $data = date('l jS \of F Y h:i:s A',time());
+        $data = time();
         $post_name = $_POST["post_name"];
         $post_full = $_POST["post_full"];
         $post_desc = substr($post_full,0,100);

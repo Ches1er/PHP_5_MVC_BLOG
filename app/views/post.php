@@ -49,7 +49,7 @@
     <div class="text">
         <div class="post_name"><a href="\post\<?=$post->post_id?>"><?=$post->post_name?></a></div>
         <div class="post_author">Author: <?=$post->author()->login?></div>
-        <div class="post_data"><?=$post->data?></div>
+        <div class="post_data"><?=date('d-m-y h:m:s',$post->data)?></div>
         <div class="post_full"><?=$post->post_full?></div>
     </div>
     <div class="upic"><img class="large_avatar" src="/<?=$post->author()->getPicture()->path?>" alt=""></div>

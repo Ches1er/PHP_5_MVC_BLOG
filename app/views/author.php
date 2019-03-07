@@ -59,7 +59,7 @@
     <div class="main_post">
         <div class="text">
             <div class="post_name"><a href="\post\<?=$post->post_id?>"><?=$post->post_name?></a></div>
-            <div class="post_data"><?=$post->data?></div>
+            <div class="post_data"><?=date('d-m-y h:m:s',$post->data)?></div>
             <div class="post_desc"><?=$post->post_desc?></div>
             <a href="/myposts/delpost/<?=$post->post_id?>">delete post</a>
         </div>

@@ -16,16 +16,16 @@ class Main extends Controller
 {
     public function actionIndex(){
         isset($_GET["page"])?$page=$_GET["page"]:$page=1;
-        !is_null($this->getParam("criteria"))?
+/*        !is_null($this->getParam("criteria"))?
             $criteria=$this->getParam("criteria"):
-                $criteria="asc";
+                $criteria="asc";*/
         $view = new TemplateView("main","templates/def");
         $view->user=MainService::instance()->activUser();
         $view->user_roles = MainService::instance()->activUserRole();
         $view->number_of_posts =MainService::instance()->postsCount($this->getParam("caturl"));
         $view->posts_per_page = MainService::POSTS_PER_PAGE;
         $view->posts=MainService::instance()
-            ->getPosts($this->getParam("caturl"),$page);
+            ->getPostsSort($this->getParam("caturl"),$page);
         $view->menu_cat=MainService::instance()->getCategories();
         $view->error=MainService::instance()->getError();
         Auth::instance()->delError();

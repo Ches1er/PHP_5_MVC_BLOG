@@ -20,7 +20,6 @@ class Category extends \core\base\Model
     }
     public function posts($postPerPage,$offset){
         return $this->hasMany(Post::class,"category_id","category_id")
-            ->limit($postPerPage,$offset)->get();
+            ->orderBy("data","desc")->limit($postPerPage,$offset)->get();
     }
-
 }

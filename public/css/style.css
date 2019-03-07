@@ -347,5 +347,9 @@ select,input[name="Add post"]{
     border-radius: 5px;
 }
 
+form>div{
+    background-color: #fff;
+}
+
 
 

@@ -252,7 +252,6 @@ class DBQueryBuilder
         $fields = implode("`,`",array_keys($data));
         $values = implode(", :",array_keys($data));
         $q ="INSERT INTO `{$table}` (`{$fields}`) VALUES (:{$values})";
-        //echo $q;
         return $this->executor->executeInsert($q,$data);
     }
     public function update($table,array $data,array $params=[]){
@@ -270,6 +269,7 @@ class DBQueryBuilder
     }
     public function delete($table,array $data=[]){
         $where = $this->buildWhere();
+        $table = self::_field($table);
         $q = "DELETE FROM {$table} {$where}";
         $this->executor->executeUpdate($q,$data);
     }

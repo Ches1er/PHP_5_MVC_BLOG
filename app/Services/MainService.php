@@ -65,10 +65,12 @@ class MainService
         if ($category_url===null||$category_url==="all") return Post::getWithOffset($postPerPage,$offset);
         return Category::where("category_url",$category_url)->first()->posts($postPerPage,$offset);
     }
-    public function getPostsSort($category_url,$page,$sort_criteria){
+
+    public function getPostsSort($category_url,$page,$sort_criteria="desc"){
         $page===1?$offset = 0:$offset=$page*self::POSTS_PER_PAGE-self::POSTS_PER_PAGE;
         $postPerPage = self::POSTS_PER_PAGE;
-        if ($category_url===null) return Post::getWithOffsetSort($postPerPage,$offset,"data",$sort_criteria);
+        if ($category_url===null||$category_url==="all") return
+            Post::getWithOffsetSort($postPerPage,$offset,"data",$sort_criteria);
         return Category::where("category_url",$category_url)->first()->posts($postPerPage,$offset);
     }
 
