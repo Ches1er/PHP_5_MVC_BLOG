@@ -23,7 +23,8 @@ class Login_registr extends Controller
     public function actionRegisterhandle(){
         $login = $_POST["login"];
         $password = $_POST["pass"];
-        LoginRegistrService::instance()->registerProcess($login,$password);
+        $email = $_POST["email"];
+        LoginRegistrService::instance()->registerProcess($login,$password,$email);
         return "redirect:/";
     }
 }

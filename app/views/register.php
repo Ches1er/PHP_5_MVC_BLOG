@@ -53,6 +53,7 @@
 <form action="/main/registerhandle" method="post">
     Введите имя пользователя:<input type="text" name="login">
     Введите пароль:<input type="password" name="pass">
+    Введите email:<input type="text" name="email">
     <input type="submit" value="Зарегистрироваться">
 </form>
 </div>

@@ -26,12 +26,14 @@ class User extends Model
         return ((new User())::where("login",$login)->one());
     }
 
-    public function addUser($login,$password,$sign="Here is my sign",$upic_id=4){
+    public function addUser($login,$password,$email,$sign="Here is my sign",$upic_id=4){
         if($this->isLoginEngaged($login)) {
             return false;
         }
-        $last_id=$this->addData(["login"=>$login,"password"=>$password,"sign"=>$sign,"upic_id"=>$upic_id]);
-        (new Users_roles())->addData(["user_id"=>$last_id,"role_id"=>2]);
+        $last_id=$this->addData(["login"=>$login,"password"=>$password,"sign"=>$sign,"upic_id"=>$upic_id,"email"=>$email]);
+        $token = rand(0,1000);
+        (new Token())->addData(["token"=>$token,"user_id"=>$last_id]);
+        //(new Users_roles())->addData(["user_id"=>$last_id,"role_id"=>2]);
         return true;
     }
     public function changeSign($login,$sign):void{
