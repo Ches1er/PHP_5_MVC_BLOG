@@ -7,6 +7,7 @@
  */
 namespace app\models;
 use core\base\Model;
+use app\Services\FinalRegisterMailService;
 class User extends Model
 {
     protected static $table = "users";
@@ -33,7 +34,7 @@ class User extends Model
         $last_id=$this->addData(["login"=>$login,"password"=>$password,"sign"=>$sign,"upic_id"=>$upic_id,"email"=>$email]);
         $token = rand(0,1000);
         (new Token())->addData(["token"=>$token,"user_id"=>$last_id]);
-        //(new Users_roles())->addData(["user_id"=>$last_id,"role_id"=>2]);
+        (new FinalRegisterMailService($email,$token))->sendMail();
         return true;
     }
     public function changeSign($login,$sign):void{

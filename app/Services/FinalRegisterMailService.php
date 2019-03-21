@@ -5,27 +5,28 @@
  * Date: 20.03.2019
  * Time: 20:02
  */
-
 namespace app\Services;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require 'vendor/autoload.php';
+require '../vendor/autoload.php';
 
-class MailService
+
+class FinalRegisterMailService
 {
     private $mail;
     private $usermail;
-
-    public function __construct($user_mail)
+    private $token;
+    public function __construct($user_mail,$token)
     {
         $this->mail = new PHPMailer(true);
         $this->usermail=$user_mail;
+        $this->token=$token;
     }
-
     public function sendMail(){
+        $body = "<a href=\"http://mydomain/finalregister/$this->token\">Link</a>";
         try {
             //Server settings
-            $this->mail->SMTPDebug = 2;                                       // Enable verbose debug output
+            $this->mail->SMTPDebug = 0;                                       // Enable verbose debug output
             $this->mail->isSMTP();                                            // Set mailer to use SMTP
             $this->mail->Host       = 'smtp.gmail.com';  // Specify main and backup SMTP servers
             $this->mail->SMTPAuth   = true;                                   // Enable SMTP authentication
@@ -33,23 +34,18 @@ class MailService
             $this->mail->Password   = 'testemail';                               // SMTP password
             $this->mail->SMTPSecure = 'tls';                                  // Enable TLS encryption, `ssl` also accepted
             $this->mail->Port       = 587;                                    // TCP port to connect to
-
             //Recipients
             $this->mail->setFrom('myblogtestemail@gmail.com', 'Mailer');
             $this->mail->addAddress($this->usermail, 'User');     // Add a recipient
             $this->mail->addReplyTo('myblogtestemail@gmail.com', 'Information');
-
             // Content
             $this->mail->isHTML(true);                                  // Set email format to HTML
             $this->mail->Subject = 'Here is the subject';
-            $this->mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+            $this->mail->Body    = $body;
             $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
-
             $this->mail->send();
-            echo 'Message has been sent';
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$this->mail->ErrorInfo}";
         }
     }
-
 }

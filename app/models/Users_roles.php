@@ -17,4 +17,9 @@ class Users_roles extends Model
     public $role_id;
 
     protected static $table = "users_roles";
+
+    public function addUserRole($user_id){
+        $this->addData(["user_id"=>$user_id,"role_id"=>2]);
+        return true;
+    }
 }

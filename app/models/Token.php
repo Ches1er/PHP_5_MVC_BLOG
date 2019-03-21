@@ -15,8 +15,8 @@ class Token extends Model
 {
   protected static $table = "token";
 
-  private $id;
-  private $token;
-  private $user_id;
+  public $id;
+  public $token;
+  public $user_id;
 
 }

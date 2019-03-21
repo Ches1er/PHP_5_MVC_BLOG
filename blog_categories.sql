@@ -11,6 +11,7 @@ CREATE TABLE users
   password varchar(255) NOT NULL,
   sign varchar(255),
   upic_id int(11),
+  email varchar(255),
   CONSTRAINT user_pic FOREIGN KEY (upic_id) REFERENCES upic (upic_id)
 );
 
@@ -56,4 +57,11 @@ CREATE TABLE comments
   post_id int(11) NOT NULL,
   CONSTRAINT comments_users_user_id_fk FOREIGN KEY (user_id) REFERENCES users (user_id),
   CONSTRAINT comments_posts_post_id_fk FOREIGN KEY (post_id) REFERENCES posts (post_id)
+);
+
+create table token(
+  id int(11) PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  token varchar(255) NOT NULL,
+  user_id int(11) NOT NULL,
+  CONSTRAINT token_users_user_id_fk FOREIGN KEY (user_id) REFERENCES users (user_id)
 );

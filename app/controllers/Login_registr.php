@@ -27,4 +27,8 @@ class Login_registr extends Controller
         LoginRegistrService::instance()->registerProcess($login,$password,$email);
         return "redirect:/";
     }
+    public function actionFinalregister(){
+        LoginRegistrService::instance()->finalregister($this->getParam("token"));
+        return "redirect:/";
+    }
 }
