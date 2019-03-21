@@ -62,7 +62,7 @@ class LoginRegistrService
             return "";
         }
     }
-    public function finalregister($token){
+    public function activateuser($token){
         $user_id=(new Token())::where("token",$token)->one()["user_id"];
         (new Users_roles())->addUserRole($user_id);
     }

@@ -23,7 +23,7 @@ class FinalRegisterMailService
         $this->token=$token;
     }
     public function sendMail(){
-        $body = "<a href=\"http://mydomain/finalregister/$this->token\">Link</a>";
+        $body = "<a href=\"http://mydomain/activate/$this->token\">Для завершения регистрации перейдите по этой ссылке</a>";
         try {
             //Server settings
             $this->mail->SMTPDebug = 0;                                       // Enable verbose debug output
@@ -40,7 +40,7 @@ class FinalRegisterMailService
             $this->mail->addReplyTo('myblogtestemail@gmail.com', 'Information');
             // Content
             $this->mail->isHTML(true);                                  // Set email format to HTML
-            $this->mail->Subject = 'Here is the subject';
+            $this->mail->Subject = 'Activation';
             $this->mail->Body    = $body;
             $this->mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
             $this->mail->send();

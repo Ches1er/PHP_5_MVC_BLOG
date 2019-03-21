@@ -32,7 +32,7 @@ class User extends Model
             return false;
         }
         $last_id=$this->addData(["login"=>$login,"password"=>$password,"sign"=>$sign,"upic_id"=>$upic_id,"email"=>$email]);
-        $token = rand(0,1000);
+        $token = md5($login).rand(0,1000);
         (new Token())->addData(["token"=>$token,"user_id"=>$last_id]);
         (new FinalRegisterMailService($email,$token))->sendMail();
         return true;

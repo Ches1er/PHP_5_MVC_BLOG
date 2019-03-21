@@ -51,9 +51,9 @@ return [
             "controller" => "login_registr",
             "action" => "registerhandle",
         ]),
-        new Route("finalregister/{token}",[
+        new Route("activate/{token}",[
             "controller" => "login_registr",
-            "action" => "finalregister",
+            "action" => "activateuser",
         ]),
 
         //Admin action
