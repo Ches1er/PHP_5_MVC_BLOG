@@ -21,6 +21,7 @@ class Profile extends Controller
     public function actionIndex(){
         $view = new TemplateView("profile","templates/def");
         $view->user = MainService::instance()->activUser();
+        $view->user_roles = MainService::instance()->activUserRole();
         return $view;
     }
     public function actionAddpic()

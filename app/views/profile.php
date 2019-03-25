@@ -3,8 +3,8 @@
 <nav>
     <ul class="main_menu">
         <li><a href="/">Main</a></li>
-        <?php if (!empty($user_roles)):
-            if (in_array("admin", $user_roles)):?>
+        <?php if (!empty($user_roles)):?>
+            <?php if (in_array("admin", $user_roles)):?>
                 <li><a href="/admin">Admin</a></li>
                 <li><a href="/profile">User Profile</a></li>
                 <li><a href="/myposts">My Posts</a></li>
@@ -17,12 +17,15 @@
         <?php if (is_null($user)): ?>
             <li><a href="/main/register">Sign Up</a></li>
             <li><a href="/main/login">Sign In</a></li>
-        <?php else: ?>
+        <?php endif; ?>
+        <?php if (!is_null($user)&& empty($user_roles)): ?>
+            <li><a href="/profile">User Profile</a></li>
+        <?php endif; ?>
+        <?php if (!is_null($user)): ?>
             <li><a href="/main/logout">Logout</a></li>
         <?php endif; ?>
 
     </ul>
-
 
     <!-- Activ user -->
 
@@ -54,6 +57,9 @@
 
 <div class="profile_container">
     <div class="user_info">
+        <?php if (empty($user_roles)):?>
+            <div class="error">Вы не подтвердили свою почту</div>
+        <?php endif;?>
         <div class="user_name">Ваш текущий логин: <?= $user->login?></div>
         <div class="user_sign">Ваша текущая подпись: <?=$user->sign?></div>
         <img class="large_avatar" src="<?=$user->getPicture()->path?>" alt="">

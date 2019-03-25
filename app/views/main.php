@@ -17,7 +17,11 @@
         <?php if (is_null($user)): ?>
             <li><a href="/main/register">Sign Up</a></li>
             <li><a href="/main/login">Sign In</a></li>
-        <?php else: ?>
+        <?php endif; ?>
+        <?php if (!is_null($user)&& empty($user_roles)): ?>
+            <li><a href="/profile">User Profile</a></li>
+        <?php endif; ?>
+        <?php if (!is_null($user)): ?>
             <li><a href="/main/logout">Logout</a></li>
         <?php endif; ?>
 

@@ -20,6 +20,7 @@ class Author extends Controller
         $view = new TemplateView("author","templates/def");
         $view->posts = Post::where("user_id",self::getUserId())->orderBy("data","desc")->get();
         $view->categories = Category::get();
+        $view->user_roles = MainService::instance()->activUserRole();
         $view->user=MainService::instance()->activUser();
         return $view;
     }

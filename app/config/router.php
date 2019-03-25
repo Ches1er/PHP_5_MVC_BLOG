@@ -113,9 +113,6 @@ return [
         new Route("profile",[
             "controller" => "profile",
             "action" => "index",
-        ],[
-            "secure"=>true,
-            "role"=>"user"
         ]),
         new Route("addpic",[
             "controller" => "profile",

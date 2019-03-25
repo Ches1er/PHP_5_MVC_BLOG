@@ -53,4 +53,18 @@ class User extends Model
         return $this->belongsTo(Upic::class,"upic_id","upic_id");
     }
 
+    //Option
+
+/*    public function hasRole(){
+        $all_user_info = $this->hasManyBelong(Role::class,"users_roles",
+            "role_id","role_id","user_id","user_id")->all();
+        $roles = [];
+        if (count($all_user_info)>0){
+            foreach ($all_user_info as $user) {
+                $roles[]=$user["role_name"];
+            }
+        }
+        else $roles = null;
+        return $roles;
+    }*/
 }
